@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Iris + Vue.js • TodoMVC</title>
+  <title>ToDo</title>
   <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.0.4/index.css">
   <!-- this needs to be loaded before guide's inline scripts -->
   <script src="https://vuejs.org/js/vue.js"></script>
@@ -23,8 +23,8 @@
 <body>
   <section class="todoapp">
     <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
+      <h1>ToDo</h1>
+      <input class="new-todo" autofocus autocomplete="off" placeholder="该干些什么呢？" v-model="newTodo"
         @keyup.enter="addTodo">
     </header>
     <section class="main" v-show="todos.length" v-cloak>
@@ -64,7 +64,7 @@
     </footer>
   </section>
   <footer class="info">
-    <p>Double-click to edit a todo</p>
+    <p>双击修改一个任务</p>
   </footer>
 
   <script src="/js/app.js"></script>
