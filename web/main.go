@@ -1,63 +1,101 @@
 package main
 
 import (
-	"strings"
-
-	"todo-mvc/todo"
+	"time"
+	"todo-mvc/todo/config"
 	"todo-mvc/web/controllers"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
-	"github.com/kataras/iris/v12/websocket"
 )
 
 func main() {
+	app := newApp()
+
+	//应用App设置
+	configation(app)
+
+	//路由设置
+	mvcHandle(app)
+
+	config := config.InitConfig()
+	addr := ":" + config.Port
+	app.Run(
+		iris.Addr(addr), //在端口8080进行监听
+		iris.WithoutServerError(iris.ErrServerClosed), //无服务错误提示
+		iris.WithOptimizations,                        //对json数据序列化更快的配置
+	)
+}
+
+//构建App
+func newApp() *iris.Application {
 	app := iris.New()
 
-	// serve our app in public, public folder
-	// contains the client-side vue.js application,
-	// no need for any server-side template here,
-	// actually if you're going to just use vue without any
-	// back-end services, you can just stop afer this line and start the server.
+	//设置日志级别  开发阶段为debug
+	app.Logger().SetLevel("debug")
+
+	//注册静态资源
 	app.HandleDir("/", iris.Dir("./public"))
 
-	// configure the http sessions.
-	sess := sessions.New(sessions.Config{
-		Cookie: "iris_session",
+	/* //注册视图文件
+	app.RegisterView(iris.HTML("/", ".html"))
+	app.Get("/", func(context context.Context) {
+		context.View("index.html")
+	}) */
+
+	return app
+}
+
+/**
+ * 项目设置
+ */
+func configation(app *iris.Application) {
+
+	//配置 字符编码
+	app.Configure(iris.WithConfiguration(iris.Configuration{
+		Charset: "UTF-8",
+	}))
+
+	//错误配置
+	//未发现错误
+	/* 	app.OnErrorCode(iris.StatusNotFound, func(context context.Context) {
+	   		context.JSON(iris.Map{
+	   			"errmsg": iris.StatusNotFound,
+	   			"msg":    " not found ",
+	   			"data":   iris.Map{},
+	   		})
+	   	})
+
+	   	app.OnErrorCode(iris.StatusInternalServerError, func(context context.Context) {
+	   		context.JSON(iris.Map{
+	   			"errmsg": iris.StatusInternalServerError,
+	   			"msg":    " interal error ",
+	   			"data":   iris.Map{},
+	   		})
+	   	}) */
+}
+
+//MVC 架构模式处理
+func mvcHandle(app *iris.Application) {
+	//启用session
+	sessManager := sessions.New(sessions.Config{
+		Cookie:  "sessioncookie",
+		Expires: 24 * time.Hour,
 	})
 
-	// create a sub router and register the http controllers.
-	todosRouter := app.Party("/todos")
+	//engine := datasource.NewMysqlEngine()
 
-	// create our mvc application targeted to /todos relative sub path.
-	todosApp := mvc.New(todosRouter)
+	//用户模块功能
+	//userService := service.NewUserService(engine)
 
-	// any dependencies bindings here...
-	todosApp.Register(
-		todo.NewMemoryService(),
+	user := mvc.New(app.Party("/user")) //设置路由组
+	user.Register(
+		//userService,
+		sessManager.Start,
 	)
-
-	todosController := new(controllers.TodoController)
-	// controllers registration here...
-	todosApp.Handle(todosController)
-
-	// Create a sub mvc app for websocket controller.
-	// Inherit the parent's dependencies.
-	todosWebsocketApp := todosApp.Party("/sync")
-	todosWebsocketApp.HandleWebsocket(todosController).
-		SetNamespace("todos").
-		SetEventMatcher(func(methodName string) (string, bool) {
-			return strings.ToLower(methodName), true
-		})
-
-	websocketServer := websocket.New(websocket.DefaultGorillaUpgrader, todosWebsocketApp)
-	idGenerator := func(ctx iris.Context) string {
-		id := sess.Start(ctx).ID()
-		return id
-	}
-	todosWebsocketApp.Router.Get("/", websocket.Handler(websocketServer, idGenerator))
-
-	// start the web server at http://localhost:8080
-	app.Listen(":8080")
+	//通过mvc的Handle方法进行控制器的指定
+	user.Handle(new(controllers.UserController))
 }
