@@ -1,4 +1,4 @@
-package datamodles
+package datamodels
 
 type User struct {
 	//如果field名称为Id，而且类型为int64，并没有定义tag，则会被xorm视为主键，并且拥有自增属性
