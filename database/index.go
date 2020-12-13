@@ -8,6 +8,7 @@ import (
 
 	"github.com/YanJieMao/ToDo/config"
 	"github.com/YanJieMao/ToDo/model/pojo"
+	_ "github.com/go-sql-driver/mysql"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )
@@ -43,6 +44,7 @@ func initMysql() {
 	dbUser := config.Viper.GetString("mysql.dbUser")
 	dbPasswd := config.Viper.GetString("mysql.dbPasswd")
 	dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", dbUser, dbPasswd, dbHost, dbPort, dbName, dbParams)
+	fmt.Println(dbURL)
 
 	var err error
 	DB, err = xorm.NewEngine(dbType, dbURL)

@@ -1,16 +1,15 @@
 package main
 
 import (
+	"github.com/YanJieMao/ToDo/config"
+	"github.com/YanJieMao/ToDo/middleware"
+	"github.com/YanJieMao/ToDo/route"
 	"github.com/kataras/iris/v12"
 
 	"github.com/kataras/iris/v12/middleware/logger"
 	"github.com/kataras/iris/v12/middleware/recover"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"github.com/JabinGP/demo-chatroom/config"
-	"github.com/JabinGP/demo-chatroom/middleware"
-	"github.com/JabinGP/demo-chatroom/route"
 )
 
 func main() {
