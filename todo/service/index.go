@@ -1,6 +1,6 @@
 package service
 
-import "github.com/YanJieMao/ToDo/todo/database"
+import "ToDo/todo/database"
 
 // NewUser get a user service
 func NewUser() UserService {

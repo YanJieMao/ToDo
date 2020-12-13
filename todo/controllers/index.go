@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/YanJieMao/ToDo/todo/database"
-	"github.com/YanJieMao/ToDo/todo/service"
+	"ToDo/todo/database"
+	"ToDo/todo/service"
 )
 
 var db = database.DB
