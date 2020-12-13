@@ -1,0 +1,20 @@
+[server]
+  name = "ToDo"
+  addr = ":8888"
+
+[server.logger]
+  level = "debug"
+
+# 数据库相关
+[database]
+  driver = "mysql"
+
+[mysql]
+  dbHost = "localhost"
+  dbPort = "3306"
+  dbName = "todo"
+  dbParams = "parseTime=true&loc=Local"
+  dbUser = "root"
+  dbPasswd = ""
+
+

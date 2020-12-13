@@ -1,4 +1,4 @@
-module todo-mvc
+module github.com/YanJieMao/ToDo
 
 go 1.15
 
@@ -12,6 +12,8 @@ require (
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
+	github.com/spf13/viper v1.3.2
 	github.com/yudai/pp v2.0.1+incompatible // indirect
+	xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb
 	xorm.io/xorm v1.0.5
 )
