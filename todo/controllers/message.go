@@ -1,7 +1,6 @@
 package controllers
 
-/* import (
-	"github.com/JabinGP/demo-chatroom/model"
+import (
 	"github.com/YanJieMao/ToDo/todo/datamodels"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reqo"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reso"
@@ -32,7 +31,7 @@ func PostMessage(ctx iris.Context) {
 func GetMessage(ctx iris.Context) {
 	req := reqo.GetMessage{}
 	ctx.ReadQuery(&req)
-	logined := ctx.Values().Get("logined").(model.Logined)
+	logined := ctx.Values().Get("logined").(datamodels.Logined)
 
 	msgList, err := messageService.Query(
 		req.BeginID,
@@ -42,7 +41,7 @@ func GetMessage(ctx iris.Context) {
 	)
 	if err != nil {
 		ctx.StatusCode(iris.StatusInternalServerError)
-		ctx.JSON(model.ErrorQueryDatabase(err))
+		ctx.JSON(datamodels.ErrorQueryDatabase(err))
 		return
 	}
 
@@ -70,4 +69,3 @@ func GetMessage(ctx iris.Context) {
 
 	ctx.JSON(resList)
 }
-*/

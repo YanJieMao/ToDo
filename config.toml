@@ -1,6 +1,6 @@
 [server]
-  name = "ToDo"
-  addr = ":8080"
+  name = "demo-chatroom"
+  addr = ":8888"
 
 [server.logger]
   level = "debug"
@@ -10,9 +10,9 @@
   driver = "mysql"
 
 [mysql]
-  dbHost = "localhost"
+  dbHost = "127.0.0.1"
   dbPort = "3306"
-  dbName = "todo"
+  dbName = "demo"
   dbParams = "parseTime=true&loc=Local"
   dbUser = "root"
   dbPasswd = ""
