@@ -1,6 +1,6 @@
 package controllers
 
-import (
+/* import (
 	"github.com/JabinGP/demo-chatroom/model"
 	"github.com/YanJieMao/ToDo/todo/datamodels"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reqo"
@@ -70,3 +70,4 @@ func GetMessage(ctx iris.Context) {
 
 	ctx.JSON(resList)
 }
+*/

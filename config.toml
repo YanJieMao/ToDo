@@ -1,6 +1,6 @@
 [server]
   name = "ToDo"
-  addr = ":9999"
+  addr = ":8080"
 
 [server.logger]
   level = "debug"
