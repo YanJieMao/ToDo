@@ -1,8 +1,8 @@
 package route
 
 import (
-	"github.com/YanJieMao/ToDo/todo/controllers"
-	"github.com/YanJieMao/ToDo/todo/middleware"
+	"ToDo/todo/controllers"
+	"ToDo/todo/middleware"
 	"github.com/kataras/iris/v12/core/router"
 )
 

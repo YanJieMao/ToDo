@@ -8,6 +8,7 @@ import (
 
 	"github.com/YanJieMao/ToDo/todo/config"
 	"github.com/YanJieMao/ToDo/todo/datamodels/pojo"
+
 	"xorm.io/core"
 	"xorm.io/xorm"
 )
@@ -65,9 +66,9 @@ func initTable() {
 // 设置可选配置
 func configDB() {
 	// 设置日志等级，设置显示sql，设置显示执行时间
-	DB.SetLogLevel(xorm.DEFAULT_LOG_LEVEL)
+	//DB.SetLogLevel(xorm.DEFAULT_LOG_LEVEL)
 	DB.ShowSQL(true)
-	DB.ShowExecTime(true)
+	//DB.ShowExecTime(true)
 
 	// 指定结构体字段到数据库字段的转换器
 	// 默认为core.SnakeMapper

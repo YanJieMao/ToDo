@@ -1,8 +1,9 @@
 package controllers
 
 import (
+	"ToDo/todo/datamodels/reso"
+
 	"github.com/JabinGP/demo-chatroom/model"
-	"github.com/YanJieMao/ToDo/todo/datamodels/reso"
 	"github.com/kataras/iris/v12"
 )
 

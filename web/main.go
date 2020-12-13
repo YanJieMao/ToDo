@@ -4,6 +4,7 @@ import (
 	"github.com/YanJieMao/ToDo/todo/config"
 	"github.com/YanJieMao/ToDo/todo/middleware"
 	"github.com/YanJieMao/ToDo/todo/route"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/kataras/iris/v12"
 
