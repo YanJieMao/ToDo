@@ -6,14 +6,9 @@ import (
 	"log"
 	"sync"
 
-<<<<<<< HEAD
 	"github.com/YanJieMao/ToDo/todo/config"
 	"github.com/YanJieMao/ToDo/todo/datamodels/pojo"
 
-=======
-	"ToDo/todo/config"
-	"ToDo/todo/datamodels/pojo"
->>>>>>> 0e15918486871b90d2b725f099b6fb6b3df95c2d
 	"xorm.io/core"
 	"xorm.io/xorm"
 )

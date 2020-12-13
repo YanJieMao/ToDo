@@ -1,7 +1,7 @@
 package service
 
 import (
-	"ToDo/todo/datamodels/pojo"
+	"github.com/YanJieMao/ToDo/todo/datamodels/pojo"
 	"xorm.io/xorm"
 )
 

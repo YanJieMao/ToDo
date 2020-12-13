@@ -3,11 +3,9 @@ package controllers
 import (
 	"errors"
 	"log"
-<<<<<<< HEAD
 
 	"github.com/YanJieMao/ToDo/todo/datamodels"
-=======
->>>>>>> 0e15918486871b90d2b725f099b6fb6b3df95c2d
+
 	"github.com/YanJieMao/ToDo/todo/datamodels/pojo"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reqo"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reso"
