@@ -1,4 +1,4 @@
-package datamodles
+package datamodels
 
 // ErrorModel 错误返回模型
 type ErrorModel struct {

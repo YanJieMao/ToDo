@@ -1,6 +1,0 @@
-{
-    "app_name": "ToDo",
-    "port": "8080",
-    "static_path": "/public",
-    "mode": "dev"
-  }

@@ -1,6 +1,6 @@
 package service
 
-import "github.com/JabinGP/demo-chatroom/database"
+import "github.com/YanJieMao/ToDo/todo/database"
 
 // NewUser get a user service
 func NewUser() UserService {

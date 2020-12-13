@@ -1,11 +1,7 @@
 package main
 
 import (
-	"strings"
-
-	"todo-mvc/todo"
-	"todo-mvc/web/controllers"
-
+	"github.com/YanJieMao/ToDo/todo"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
@@ -20,7 +16,7 @@ func main1() {
 	// no need for any server-side template here,
 	// actually if you're going to just use vue without any
 	// back-end services, you can just stop afer this line and start the server.
-	app.HandleDir("/", iris.Dir("./public"))
+	//app.HandleDir("/", iris.Dir("./public"))
 
 	// configure the http sessions.
 	sess := sessions.New(sessions.Config{
@@ -38,18 +34,18 @@ func main1() {
 		todo.NewMemoryService(),
 	)
 
-	todosController := new(controllers.TodoController)
+	//todosController := new(controllers.TodoController)
 	// controllers registration here...
-	todosApp.Handle(todosController)
+	//todosApp.Handle(todosController)
 
 	// Create a sub mvc app for websocket controller.
 	// Inherit the parent's dependencies.
 	todosWebsocketApp := todosApp.Party("/sync")
-	todosWebsocketApp.HandleWebsocket(todosController).
-		SetNamespace("todos").
-		SetEventMatcher(func(methodName string) (string, bool) {
-			return strings.ToLower(methodName), true
-		})
+	/* todosWebsocketApp.HandleWebsocket(todosController).
+	SetNamespace("todos").
+	SetEventMatcher(func(methodName string) (string, bool) {
+		return strings.ToLower(methodName), true
+	}) */
 
 	websocketServer := websocket.New(websocket.DefaultGorillaUpgrader, todosWebsocketApp)
 	idGenerator := func(ctx iris.Context) string {
@@ -59,5 +55,5 @@ func main1() {
 	todosWebsocketApp.Router.Get("/", websocket.Handler(websocketServer, idGenerator))
 
 	// start the web server at http://localhost:8080
-	app.Listen(":8080")
+	//app.Listen(":8080")
 }

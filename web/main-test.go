@@ -1,17 +1,11 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"todo-mvc/todo/datasource"
-)
+/* func mainTest() {
 
-func mainTest() {
-
-	engine := datasource.NewMysqlEngine()
+	//engine := datasource.NewMysqlEngine()
 	sql := "SELECT * FROM user"
 	//results, err := engine.Query(sql)
-	results, err := engine.QueryInterface(sql)
+	//results, err := engine.QueryInterface(sql)
 	//results, err := engine.QueryString(sql)
 	if err != nil {
 		log.Fatal("query", sql, err)
@@ -26,4 +20,4 @@ func mainTest() {
 		}
 	}
 
-}
+} */
