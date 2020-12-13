@@ -3,8 +3,6 @@ package controllers
 import (
 	"errors"
 	"log"
-
-	"github.com/JabinGP/demo-chatroom/model"
 	"github.com/YanJieMao/ToDo/todo/datamodels/pojo"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reqo"
 	"github.com/YanJieMao/ToDo/todo/datamodels/reso"
