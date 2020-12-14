@@ -2,8 +2,7 @@
 # ToDo
 这是一个todo待办清单
 
-浏览器访问的样子
+本仓库是后端项目
+采用go+iris+xorm+mysql+jwt来构建
 
-![img](/img/todo1.png)
-
-存在的问题：目前还没有把数据存储在数据库中，刷新后数据就会丢失。
+前端仓库地址https://github.com/YanJieMao/ToDo-web
