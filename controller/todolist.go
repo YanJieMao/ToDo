@@ -1,7 +1,11 @@
 package controller
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/YanJieMao/ToDo/model"
+	"github.com/YanJieMao/ToDo/model/pojo"
 	"github.com/YanJieMao/ToDo/model/reqo"
 	"github.com/YanJieMao/ToDo/model/reso"
 	"github.com/kataras/iris/v12"
@@ -10,13 +14,42 @@ import (
 func PostToDoList(ctx iris.Context) {
 	req := reqo.PostToDoList{}
 	ctx.ReadJSON(&req)
+	fmt.Println(req)
+
+	if req.UID == 0 {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(model.ErrorIncompleteData(errors.New("用户id不能为空")))
+		return
+	}
+
+	newTodo := pojo.ToDoList{
+		UID:      req.UID,
+		List:     req.List,
+		IsDone:   req.IsDone,
+		DeadLine: req.DeadLine,
+	}
+	todoID, err := todolistService.Insert(newTodo)
+	if err != nil {
+		ctx.StatusCode(iris.StatusInternalServerError)
+		ctx.JSON(model.ErrorInsertDatabase(err))
+		return
+
+	}
+
+	res := reso.PostToDoList{
+		ID: todoID,
+	}
+
+	ctx.JSON(res)
 
 }
 
 // GetToDoList return todolist
-func GetToDOList(ctx iris.Context) {
+func GetToDoList(ctx iris.Context) {
+	fmt.Println("getToDoList启动了")
 	req := reqo.GetToDoList{}
 	ctx.ReadJSON(&req)
+	fmt.Println(req)
 	resList := []reso.GetToDoList{}
 
 	todoList, err := todolistService.Query(req.UID)

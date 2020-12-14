@@ -71,6 +71,7 @@ func PostUser(ctx iris.Context) {
 		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(model.ErrorVerification(errors.New("用户名已存在")))
 		return
+
 	}
 
 	// New user and insert into database
