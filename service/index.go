@@ -17,3 +17,9 @@ func NewUser() UserService {
 		db: database.DB,
 	}
 }
+
+func NewToDoList() ToDoListService {
+	return ToDoListService{
+		db: database.DB,
+	}
+}

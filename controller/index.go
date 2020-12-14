@@ -8,3 +8,4 @@ import (
 var db = database.DB
 var messageService = service.NewMessage()
 var userService = service.NewUser()
+var todolistService = service.NewToDoList()

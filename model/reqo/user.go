@@ -8,9 +8,8 @@ type GetUser struct {
 
 // PutUser PUT "/user" request object
 type PutUser struct {
-	Gender   int64  `json:"gender"`
-	Age      int64  `json:"age"`
-	Interest string `json:"interest"`
+	Gender int64 `json:"gender"`
+	Age    int64 `json:"age"`
 }
 
 // PostUser POST "/user" request object
@@ -19,7 +18,6 @@ type PostUser struct {
 	Passwd   string `json:"passwd"`
 	Gender   int64  `json:"gender"`
 	Age      int64  `json:"age"`
-	Interest string `json:"interest"`
 }
 
 // PostLogin POST "/login" request object

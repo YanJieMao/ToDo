@@ -57,7 +57,7 @@ func initMysql() {
 // 自动同步表结构，如果不存在则创建
 func initTable() {
 	// 自动创建表
-	err := DB.Sync2(new(pojo.User), new(pojo.Message))
+	err := DB.Sync2(new(pojo.User), new(pojo.Message), new(pojo.ToDoList))
 	if err != nil {
 		log.Printf("同步数据库和结构体字段失败:%v\n", err)
 		panic(err)

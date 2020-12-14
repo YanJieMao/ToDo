@@ -2,6 +2,7 @@ package controller
 
 import (
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/YanJieMao/ToDo/model"
@@ -53,6 +54,7 @@ func PostLogin(ctx iris.Context) {
 func PostUser(ctx iris.Context) {
 	req := reqo.PostUser{}
 	ctx.ReadJSON(&req)
+	fmt.Println(req)
 
 	// Username and passwd can't be blank
 	if req.Username == "" || req.Passwd == "" {
@@ -77,7 +79,6 @@ func PostUser(ctx iris.Context) {
 		Passwd:   req.Passwd,
 		Gender:   req.Gender,
 		Age:      req.Age,
-		Interest: req.Interest,
 	}
 	userID, err := userService.Insert(newUser)
 	if err != nil {
@@ -112,7 +113,6 @@ func GetUser(ctx iris.Context) {
 			Username: user.Username,
 			Gender:   user.Gender,
 			Age:      user.Age,
-			Interest: user.Interest,
 		}
 
 		resList = append(resList, res)
@@ -143,9 +143,6 @@ func PutUser(ctx iris.Context) {
 	if req.Age != 0 {
 		user.Age = req.Age
 	}
-	if req.Interest != "" {
-		user.Interest = req.Interest
-	}
 
 	// Update user
 	err := userService.Update(user)
@@ -168,7 +165,6 @@ func PutUser(ctx iris.Context) {
 		Username: updatedUser.Username,
 		Gender:   updatedUser.Gender,
 		Age:      updatedUser.Age,
-		Interest: updatedUser.Interest,
 	}
 	ctx.JSON(res)
 }

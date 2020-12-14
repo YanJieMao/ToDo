@@ -1,6 +1,6 @@
 [server]
   name = "todo"
-  addr = ":8888"
+  addr = ":8080"
 
 [server.logger]
   level = "debug"
@@ -10,11 +10,11 @@
   driver = "mysql"
 
 [mysql]
-  dbHost = "localhost"
+  dbHost = "39.96.196.123"
   dbPort = "3306"
   dbName = "todo"
   dbParams = "parseTime=true&loc=Local"
   dbUser = "root"
-  dbPasswd = ""
+  dbPasswd = "5211314@Yuan"
 
 
