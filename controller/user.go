@@ -17,7 +17,7 @@ import (
 func PostLogin(ctx iris.Context) {
 	req := reqo.PostLogin{}
 	ctx.ReadJSON(&req)
-
+	fmt.Println(req)
 	// Query user by username
 	user, err := userService.QueryByUsername(req.Username)
 	if err != nil {
@@ -48,6 +48,7 @@ func PostLogin(ctx iris.Context) {
 		Token:    token,
 	}
 	ctx.JSON(res)
+
 }
 
 // PostUser user register

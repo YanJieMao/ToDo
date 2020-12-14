@@ -35,7 +35,7 @@ func (todolistService *ToDoListService) Insert(todolist pojo.ToDoList) (int64, e
 
 }
 
-//Update a new todolist and return id
+//Update  todolist and return id
 func (todolistService *ToDoListService) Update(todolist pojo.ToDoList) (int64, error) {
 	if _, err := todolistService.db.Update(&todolist); err != nil {
 		return 0, err

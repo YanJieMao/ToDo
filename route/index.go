@@ -12,7 +12,6 @@ func Route(app *iris.Application) {
 	{
 		routeToken(v1)
 		routeUser(v1)
-		routeMessage(v1)
 		routeToDOList(v1)
 	}
 }

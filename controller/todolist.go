@@ -70,7 +70,8 @@ func GetToDoList(ctx iris.Context) {
 
 		resList = append(resList, res)
 	}
+	res := resList
 
-	ctx.JSON(resList)
+	ctx.JSON(res)
 
 }
