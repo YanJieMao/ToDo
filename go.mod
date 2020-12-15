@@ -13,10 +13,13 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/kataras/iris/v12 v12.0.1
 	github.com/mattn/go-colorable v0.1.8 // indirect
+	github.com/mitchellh/go-homedir v1.1.0
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
-	github.com/spf13/viper v1.5.0
+	github.com/spf13/cobra v1.1.1
+	github.com/spf13/viper v1.7.0
+	github.com/ugorji/go v1.1.4 // indirect
 	github.com/valyala/fasthttp v1.18.0 // indirect
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/yalp/jsonpath v0.0.0-20180802001716-5cc68e5049a0 // indirect

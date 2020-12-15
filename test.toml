@@ -1,0 +1,18 @@
+
+[database]
+  driver = "mysql"
+
+[mysql]
+  dbhost = "localhost"
+  dbname = "todo"
+  dbparams = "parseTime=true&loc=Local"
+  dbpasswd = "12345678"
+  dbport = "3306"
+  dbuser = "root"
+
+[server]
+  addr = ":8080"
+  name = "todo"
+
+  [server.logger]
+    level = "debug"

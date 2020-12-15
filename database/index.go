@@ -19,6 +19,7 @@ var once sync.Once
 var DB *xorm.Engine
 
 func init() {
+
 	once.Do(func() {
 		dbType := config.Viper.GetString("database.driver")
 		switch dbType {

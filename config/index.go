@@ -4,6 +4,7 @@ import (
 	"log"
 	"sync"
 
+	"github.com/YanJieMao/ToDo/cmd"
 	"github.com/spf13/viper"
 )
 
@@ -13,6 +14,7 @@ var once sync.Once
 var Viper *viper.Viper
 
 func init() {
+	cmd.Execute()
 	once.Do(func() {
 		Viper = viper.New()
 		// scan the file named config in the root directory
