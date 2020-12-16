@@ -45,9 +45,10 @@ func PostToDoList(ctx iris.Context) {
 }
 
 // GetToDoList return todolist
-func GetToDoList(ctx iris.Context) {
+func ToDoListAll(ctx iris.Context) {
 	fmt.Println("getToDoList启动了")
 	req := reqo.GetToDoList{}
+	//fmt.Println(ctx)
 	ctx.ReadJSON(&req)
 	fmt.Println(req)
 	resList := []reso.GetToDoList{}
@@ -70,8 +71,7 @@ func GetToDoList(ctx iris.Context) {
 
 		resList = append(resList, res)
 	}
-	res := resList
 
-	ctx.JSON(res)
+	ctx.JSON(resList)
 
 }

@@ -7,6 +7,6 @@ import (
 
 func routeToDOList(party router.Party) {
 	party.Post("/todolist", controller.PostToDoList)
-	party.Get("/todolist", controller.GetToDoList)
+	party.Post("/todolist/all", controller.ToDoListAll)
 
 }
