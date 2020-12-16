@@ -19,6 +19,15 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/YanJieMao/ToDo/config"
+	"github.com/YanJieMao/ToDo/middleware"
+	"github.com/YanJieMao/ToDo/route"
+
+	"github.com/kataras/iris/v12"
+
+	"github.com/kataras/iris/v12/middleware/logger"
+	"github.com/kataras/iris/v12/middleware/recover"
+
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -50,16 +59,8 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+	irisStart()
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.time.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -86,4 +87,25 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+func irisStart() {
+	app := iris.New()
+	// Set logger level
+	app.Logger().SetLevel(config.Viper.GetString("server.logger.level"))
+	// Add recover to recover from any http-relative panics
+	app.Use(recover.New())
+	// Add logger to log the requests to the terminal
+	app.Use(logger.New())
+	// Globally allow options method to enable CORS
+	app.AllowMethods(iris.MethodOptions)
+	// Add global CORS handler
+	app.Use(middleware.CORS)
+
+	// Router
+	route.Route(app)
+
+	// Listen in 8888 port
+	app.Run(iris.Addr(ServerPort), iris.WithoutServerError(iris.ErrServerClosed))
+
 }

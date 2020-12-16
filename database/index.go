@@ -6,7 +6,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/YanJieMao/ToDo/config"
+	"github.com/YanJieMao/ToDo/cmd"
 	"github.com/YanJieMao/ToDo/model/pojo"
 	_ "github.com/go-sql-driver/mysql"
 	"xorm.io/core"
@@ -21,7 +21,7 @@ var DB *xorm.Engine
 func init() {
 
 	once.Do(func() {
-		dbType := config.Viper.GetString("database.driver")
+		dbType := cmd.DbType
 		switch dbType {
 		case "mysql":
 			initMysql()
@@ -37,18 +37,18 @@ func init() {
 
 // 初始化，当使用的数据库为Mysql时
 func initMysql() {
-	dbType := config.Viper.GetString("database.driver")
+	/* dbType := config.Viper.GetString("database.driver")
 	dbHost := config.Viper.GetString("mysql.dbHost")
 	dbPort := config.Viper.GetString("mysql.dbPort")
 	dbName := config.Viper.GetString("mysql.dbName")
 	dbParams := config.Viper.GetString("mysql.dbParams")
 	dbUser := config.Viper.GetString("mysql.dbUser")
-	dbPasswd := config.Viper.GetString("mysql.dbPasswd")
-	dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", dbUser, dbPasswd, dbHost, dbPort, dbName, dbParams)
+	dbPasswd := config.Viper.GetString("mysql.dbPasswd") */
+	dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", cmd.DbUser, cmd.DbPasswd, cmd.DbHost, cmd.DbPort, cmd.DbName, cmd.DbParams)
 	fmt.Println(dbURL)
 
 	var err error
-	DB, err = xorm.NewEngine(dbType, dbURL)
+	DB, err = xorm.NewEngine("mysql", dbURL)
 	if err != nil {
 		log.Printf("Open mysql failed,err:%v\n", err)
 		panic(err)
