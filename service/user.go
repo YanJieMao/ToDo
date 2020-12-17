@@ -1,13 +1,12 @@
 package service
 
 import (
+	"github.com/YanJieMao/ToDo/database"
 	"github.com/YanJieMao/ToDo/model/pojo"
-	"xorm.io/xorm"
 )
 
 // UserService user service
 type UserService struct {
-	db *xorm.Engine
 }
 
 // Query query user by username and id
@@ -15,7 +14,7 @@ func (userService *UserService) Query(username string, id uint) ([]pojo.User, er
 	var userList []pojo.User
 
 	// Limit username
-	tmpDB := userService.db.Where("username like ?", "%"+username+"%")
+	tmpDB := database.DB.Where("username like ?", "%"+username+"%")
 
 	// Limit id
 	if id != 0 {
@@ -35,7 +34,7 @@ func (userService *UserService) QueryByUsername(username string) (pojo.User, err
 	var user = pojo.User{
 		Username: username,
 	}
-	has, err := userService.db.Get(&user)
+	has, err := database.DB.Get(&user)
 	if err != nil {
 		return pojo.User{}, err
 	}
@@ -51,7 +50,7 @@ func (userService *UserService) QueryByID(id int64) (pojo.User, error) {
 		ID: id,
 	}
 
-	if _, err := userService.db.Get(&user); err != nil {
+	if _, err := database.DB.Get(&user); err != nil {
 		return pojo.User{}, err
 	}
 
@@ -60,7 +59,7 @@ func (userService *UserService) QueryByID(id int64) (pojo.User, error) {
 
 // Insert insert a new user and return id
 func (userService *UserService) Insert(user pojo.User) (int64, error) {
-	if _, err := userService.db.Insert(&user); err != nil {
+	if _, err := database.DB.Insert(&user); err != nil {
 		return 0, err
 	}
 	return user.ID, nil
@@ -68,7 +67,7 @@ func (userService *UserService) Insert(user pojo.User) (int64, error) {
 
 // Update update user and return current user infomation
 func (userService *UserService) Update(user pojo.User) error {
-	if _, err := userService.db.Update(&user); err != nil {
+	if _, err := database.DB.Update(&user); err != nil {
 		return err
 	}
 	return nil

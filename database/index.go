@@ -6,7 +6,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/YanJieMao/ToDo/cmd"
+	"github.com/YanJieMao/ToDo/config"
 	"github.com/YanJieMao/ToDo/model/pojo"
 	_ "github.com/go-sql-driver/mysql"
 	"xorm.io/core"
@@ -18,10 +18,13 @@ var once sync.Once
 // DB 数据库连接实例
 var DB *xorm.Engine
 
-func init() {
+func Init() {
+
+	fmt.Println(config.DbType)
 
 	once.Do(func() {
-		dbType := cmd.DbType
+		dbType := config.DbType
+
 		switch dbType {
 		case "mysql":
 			initMysql()
@@ -33,18 +36,21 @@ func init() {
 		configDB()
 		initTable()
 	})
+
 }
 
 // 初始化，当使用的数据库为Mysql时
 func initMysql() {
-	/* dbType := config.Viper.GetString("database.driver")
-	dbHost := config.Viper.GetString("mysql.dbHost")
-	dbPort := config.Viper.GetString("mysql.dbPort")
-	dbName := config.Viper.GetString("mysql.dbName")
-	dbParams := config.Viper.GetString("mysql.dbParams")
-	dbUser := config.Viper.GetString("mysql.dbUser")
-	dbPasswd := config.Viper.GetString("mysql.dbPasswd") */
-	dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", cmd.DbUser, cmd.DbPasswd, cmd.DbHost, cmd.DbPort, cmd.DbName, cmd.DbParams)
+	/* //dbType := config.DbType
+	dbHost := config.DbHost
+	dbPort := config.DbPort
+	dbName := config.DbName
+	dbParams := config.DbParams
+	dbUser := config.DbUser
+	dbPasswd := config.DbPasswd */
+
+	//dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", dbUser, dbPasswd, dbHost, dbPort, dbName, dbParams)
+	dbURL := fmt.Sprintf("%s:%s@(%s:%s)/%s?%s", config.DbUser, config.DbPasswd, config.DbHost, config.DbPort, config.DbName, config.DbParams)
 	fmt.Println(dbURL)
 
 	var err error
@@ -58,7 +64,7 @@ func initMysql() {
 // 自动同步表结构，如果不存在则创建
 func initTable() {
 	// 自动创建表
-	err := DB.Sync2(new(pojo.User), new(pojo.Message), new(pojo.ToDoList))
+	err := DB.Sync2(new(pojo.User), new(pojo.ToDoList))
 	if err != nil {
 		log.Printf("同步数据库和结构体字段失败:%v\n", err)
 		panic(err)

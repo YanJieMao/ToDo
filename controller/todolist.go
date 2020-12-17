@@ -28,6 +28,7 @@ func PostToDoList(ctx iris.Context) {
 		IsDone:   req.IsDone,
 		DeadLine: req.DeadLine,
 	}
+
 	todoID, err := todolistService.Insert(newTodo)
 	if err != nil {
 		ctx.StatusCode(iris.StatusInternalServerError)
@@ -53,10 +54,14 @@ func ToDoListAll(ctx iris.Context) {
 	fmt.Println(req)
 	resList := []reso.GetToDoList{}
 
+	fmt.Println(resList)
+
 	todoList, err := todolistService.Query(req.UID)
+	fmt.Println(todoList)
 	if err != nil {
 		ctx.StatusCode(iris.StatusInternalServerError)
 		ctx.JSON(model.ErrorQueryDatabase(err))
+		fmt.Print("controller查询出错了")
 		return
 	}
 
