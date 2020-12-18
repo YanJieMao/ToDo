@@ -42,12 +42,20 @@ var configCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(configCmd)
 	configCmd.Flags().StringVarP(&config.ServerPort, "serverPort", "", "", "请输入服务端口")
+	configCmd.MarkFlagRequired("serverPort")
 	configCmd.Flags().StringVarP(&config.DbType, "dbType", "", "", "请输入数据库类型")
+	configCmd.MarkFlagRequired("dbType")
 	configCmd.Flags().StringVarP(&config.DbHost, "dbHost", "", "", "请输入数据库host地址")
+	configCmd.MarkFlagRequired("dbHost")
 	configCmd.Flags().StringVarP(&config.DbPort, "dbPort", "", "", "请输入数据库端口号")
+	configCmd.MarkFlagRequired("dbPort")
 	configCmd.Flags().StringVarP(&config.DbName, "dbName", "", "", "请输入数据库名称")
+	configCmd.MarkFlagRequired("dbName")
 	configCmd.Flags().StringVarP(&config.DbParams, "dbParams", "", "", "请输入数据库参数")
+	configCmd.MarkFlagRequired("dbParams")
 	configCmd.Flags().StringVarP(&config.DbUser, "dbUser", "", "", "请输入账号")
+	configCmd.MarkFlagRequired("dbUser")
 	configCmd.Flags().StringVarP(&config.DbPasswd, "dbPasswd", "", "", "请输入密码")
+	configCmd.MarkFlagRequired("dbPasswd")
 
 }
