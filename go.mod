@@ -3,7 +3,7 @@ module github.com/YanJieMao/ToDo
 go 1.13
 
 require (
-	cloud.google.com/go v0.51.0 // indirect
+	//cloud.google.com/go v0.51.0 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.0.1-0.20200619015827-c3da72aa01ed // indirect
