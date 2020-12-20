@@ -113,6 +113,7 @@ func GetUser(ctx iris.Context) {
 		res := reso.GetUser{
 			ID:       user.ID,
 			Username: user.Username,
+			Passwd:   user.Passwd,
 			Gender:   user.Gender,
 			Age:      user.Age,
 		}
