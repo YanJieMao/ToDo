@@ -15,6 +15,7 @@ func PostToDoList(ctx iris.Context) {
 	req := reqo.PostToDoList{}
 	ctx.ReadJSON(&req)
 	fmt.Println(req)
+	fmt.Println(ctx)
 
 	if req.UID == 0 {
 		ctx.StatusCode(iris.StatusBadRequest)
@@ -49,7 +50,7 @@ func PostToDoList(ctx iris.Context) {
 func ToDoListAll(ctx iris.Context) {
 	fmt.Println("getToDoList启动了")
 	req := reqo.GetToDoList{}
-	//fmt.Println(ctx)
+	fmt.Println(ctx)
 	ctx.ReadJSON(&req)
 	fmt.Println(req)
 	resList := []reso.GetToDoList{}

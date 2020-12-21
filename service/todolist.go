@@ -1,8 +1,6 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/YanJieMao/ToDo/database"
 	"github.com/YanJieMao/ToDo/model/pojo"
 )
@@ -15,7 +13,7 @@ type ToDoListService struct {
 func (todolistService *ToDoListService) Query(uid int64) ([]pojo.ToDoList, error) {
 
 	var todoList []pojo.ToDoList
-	fmt.Println("tmpDB出错了")
+	//fmt.Println("tmpDB出错了")
 
 	//tmpDB := todolistService.db.Where("uid = ?", uid)
 	tmpDB := database.DB.Where("uid = ?", uid)
