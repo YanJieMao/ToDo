@@ -10,7 +10,7 @@ type UserService struct {
 }
 
 // Query query user by username and id
-func (userService *UserService) Query(username string, id uint) ([]pojo.User, error) {
+func (userService *UserService) Query(username string, id int64) ([]pojo.User, error) {
 	var userList []pojo.User
 
 	// Limit username
@@ -66,8 +66,8 @@ func (userService *UserService) Insert(user pojo.User) (int64, error) {
 }
 
 // Update update user and return current user infomation
-func (userService *UserService) Update(user pojo.User) error {
-	if _, err := database.DB.Update(&user); err != nil {
+func (userService *UserService) UpdateByID(id int64, user pojo.User) error {
+	if _, err := database.DB.ID(id).Update(&user); err != nil {
 		return err
 	}
 	return nil

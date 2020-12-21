@@ -114,8 +114,8 @@ func GetUser(ctx iris.Context) {
 			ID:       user.ID,
 			Username: user.Username,
 			Passwd:   user.Passwd,
-			Gender:   user.Gender,
 			Age:      user.Age,
+			Gender:   user.Gender,
 		}
 
 		resList = append(resList, res)
@@ -126,19 +126,28 @@ func GetUser(ctx iris.Context) {
 // PutUser update user information
 func PutUser(ctx iris.Context) {
 	req := reqo.PutUser{}
+
 	ctx.ReadJSON(&req)
-	logined := ctx.Values().Get("logined").(model.Logined)
+	fmt.Println("putuser-req")
+	fmt.Println(req)
+	//logined := ctx.Values().Get("logined").(model.Logined)
 
 	// // Query user by userID
-	// user, err := userService.QueryByID(userID)
-	// if err != nil {
-	// 	ctx.JSON(new(model.ResModel).WithError(err.Error()))
-	// 	return
-	// }
+	/* user, err := userService.QueryByID(req.ID)
+	fmt.Println(user)
+	if err != nil {
+		ctx.JSON(err.Error)
+		return
+	} */
 
 	user := pojo.User{
-		ID: logined.ID,
+		ID:       req.ID,
+		Username: req.Username,
+		Passwd:   req.Passwd,
+		Age:      req.Age,
+		Gender:   req.Gender,
 	}
+	fmt.Println(user)
 	// Replace if set
 	if req.Gender != 0 {
 		user.Gender = req.Gender
@@ -148,7 +157,7 @@ func PutUser(ctx iris.Context) {
 	}
 
 	// Update user
-	err := userService.Update(user)
+	err := userService.UpdateByID(user.ID, user)
 	if err != nil {
 		ctx.StatusCode(iris.StatusInternalServerError)
 		ctx.JSON(model.ErrorQueryDatabase(err))
@@ -164,8 +173,9 @@ func PutUser(ctx iris.Context) {
 	}
 
 	res := reso.PutUser{
-		ID:       updatedUser.ID,
+
 		Username: updatedUser.Username,
+		Passwd:   updatedUser.Passwd,
 		Gender:   updatedUser.Gender,
 		Age:      updatedUser.Age,
 	}
